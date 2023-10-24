@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+string rowAndCol(string text, int rows, int cols){
+    char grid[rows][cols];
+    int index = 0;
+    for (int i = 0; i < rows; i++){
+        for (int j = 0; j < cols; j++){
+            if (index < text.length())
+                grid[i][j] = text[index++];
+            else
+                grid[i][j] = ' ';
+        }
+    }
+    string cipher;
+    for (int j = 0; j < cols; j++){
+        for (int i = 0; i < rows; i++){
+            cipher += grid[i][j];
+        }
+    }
+    return cipher;
+}
+
+int main(){
+    string text = "Hello";
+    int rows = 3;
+    int cols = 3;
+    cout << "Text: " << text << endl;
+    cout << "Rows: " << rows << endl;
+    cout << "Columns: " << cols << endl;
+    cout << "Cipher: " << rowAndCol(text, rows, cols);
+    return 0;
+}

@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//the length of the key must be equal to or greater than the input text
+string oneTimePad(string text, string key){
+    string cipher;
+    for (int i = 0; i < text.size(); i++){
+        char x;
+        if (isupper(text[i]))
+            x = ((text[i] - 'A' + key[i] - 'A') % 26) + 'A';
+        else
+            x = ((text[i] - 'a' + key[i] - 'A') % 26) + 'a';
+        cipher += x;
+    }
+    return cipher;
+}
+
+int main(){
+    string text = "Hello";
+    string key = "hihih";
+    cout << "Text: " << text << endl;
+    cout << "Key: " << key << endl;
+    cout << "Cipher: " << oneTimePad(text, key);
+    return 0;
+}

@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+// Function to compute (base^exponent) % modulus
+int modPow(int base, int exponent, int modulus) {
+    int result = 1;
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result = (result * base) % modulus;
+        }
+        base = (base * base) % modulus;
+        exponent /= 2;
+    }
+    return result;
+}
+
+int modInverse(int a, int m) {
+    for (int i = 1; i < m; i++) {
+        if ((a * i) % m == 1) return i;
+    }
+    return -1; // Inverse doesn't exist
+}
+
+
+int main() {
+    int p = 17; 
+    int q = 19; 
+    int n = p * q;
+    int phi = (p - 1) * (q - 1);
+
+    // Step 3: Select public key (e)
+    int e = 5; 
+
+    // Step 4: Compute private key (d)
+    int d = modInverse(e, phi);
+
+
+    // Encryption
+    int message = 65; 
+    int encrypted = modPow(message, e, n);
+
+    cout << "Encrypted message: " << encrypted << endl;
+
+    // Decryption
+    int decrypted = modPow(encrypted, d, n);
+
+    cout << "Decrypted message: " << decrypted << endl;
+
+    return 0;
+}
